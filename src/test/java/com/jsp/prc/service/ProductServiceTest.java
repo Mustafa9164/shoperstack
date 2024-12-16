@@ -4,6 +4,7 @@ package com.jsp.prc.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -69,16 +70,17 @@ class ProductServiceTest {
 		Assertions.assertEquals(p1.getProductId(), actual.getProductId());
 	}
 	
+	@Test
+	void testFindAllProduct() {
+		Mockito.when(repo.findAll()).thenReturn(l1);
+		
+		ResponseEntity<ResponseStructure<List<Product>>> temp = service.findAllProduct();
+		ResponseStructure<List<Product>> body = temp.getBody();
+		Assertions.assertEquals(l1.get(0).getProductId(), body.getData().get(0).getProductId());
+	}
+
+
 	
-
-//
-//	@Test
-//	void testFindAllProduct() {
-//		fail("Not yet implemented");
-//	}
-//
-
-//
 //	@Test
 //	void testUpdateProduct() {
 //		fail("Not yet implemented");
