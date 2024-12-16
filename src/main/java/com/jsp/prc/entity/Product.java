@@ -49,12 +49,23 @@ public class Product {
 	public void setDateOfManufacture(LocalDate dateOfManufacture) {
 		this.dateOfManufacture = dateOfManufacture;
 	}
+	
+	public Product(Integer productId, String productName, String productFeatures, Double productPrice,
+			LocalDate dateOfManufacture) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productFeatures = productFeatures;
+		this.productPrice = productPrice;
+		this.dateOfManufacture = dateOfManufacture;
+	}
+	
+	public Product() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", productName=" + productName + ", productFeatures="
 				+ productFeatures + ", productPrice=" + productPrice + ", dateOfManufacture=" + dateOfManufacture + "]";
 	}
-	
-	
-
 }

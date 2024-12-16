@@ -20,11 +20,15 @@ public class ProductService{
 	private ProductRepo productRepo;
 
 	public ResponseEntity<ResponseStructure<Product>> saveProduct(Product product) {
+		if(productRepo.existsById(product.getProductId())) {
+			throw new ProductNotFoundException("Product Withe Given id = " + product.getProductId() + " Not Found"); 
+		}
 		ResponseStructure<Product> structure=new ResponseStructure<Product>();
 		structure.setData(productRepo.save(product));
 		structure.setMessage("product saved");
 		structure.setStatusCode(HttpStatus.CREATED.value());
 		return new ResponseEntity<ResponseStructure<Product>>(structure,HttpStatus.CREATED);
+		
 	}
 
 	public ResponseEntity<ResponseStructure<Product>> findById(Integer productId) {
@@ -74,7 +78,6 @@ public class ProductService{
 			return new ResponseEntity<ResponseStructure<Product>>(structure,HttpStatus.OK);
 		}
 		throw new ProductNotFoundException("Product Withe Given id = " + productId + " Not Found");
-
 	}
 
 	public ResponseEntity<ResponseStructure<Product>> updateProductPrice(Integer productId, Double productPrice) {
@@ -83,6 +86,7 @@ public class ProductService{
 		ResponseStructure<Product> structure=new ResponseStructure<Product>();
 		if(optional.isPresent()) {
 			
+	        // Get the product and update its price
 			Product product = optional.get();
 			product.setProductPrice(productPrice);
 			Product updatedProduct = productRepo.save(product);

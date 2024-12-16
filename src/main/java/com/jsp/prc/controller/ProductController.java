@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jsp.prc.entity.Product;
 import com.jsp.prc.service.ProductService;
 import com.jsp.prc.util.ResponseStructure;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/version/products")
+@Tag(description = "EMployee Crud Operation", name = "Employee")
 public class ProductController {
 	
 	@Autowired
